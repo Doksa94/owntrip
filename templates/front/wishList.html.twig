@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table class="table table-dark table-striped mt-5 w-75 mx-auto">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Pays</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for wish in wishes %}
+            <tr>
+                <td >{{ wish.activity.name }}</td>
+                <td>{{ wish.activity.city.name }}</td>
+                <td>
+                    <a href="{{ path('wishList_detail', {'id': wish.activity.id}) }}" class="btn btn-info">Voir le détail de l'activité</a>
+
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

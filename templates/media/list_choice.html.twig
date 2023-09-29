@@ -1,0 +1,31 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block titre %}
+    {{ title }}
+{% endblock %}
+{% block title %}
+    {{ parent() }} {{ title }}
+{% endblock %}
+
+
+
+{% block body %}
+
+    <h2>Quel type de média souhaitez vous gérer</h2>
+    {% for type in types %}
+        {% if type.name=='Lien' %}
+            <a href="{{ path('list_lien', {'id': type.id}) }}" class="btn btn-lg btn-info p-5 m-5">{{ type.name }}</a>
+        {% endif %}
+        {% if  type.name=='Photo' %}
+            <a href="{{ path('list_photo', {'id': type.id}) }}" class="btn btn-lg btn-info p-5 m-5">{{ type.name }}</a>
+        {% endif %}
+        {% if type.name=='Vidéo' %}
+            <a href="{{ path('list_video', {'id': type.id}) }}" class="btn btn-lg btn-info p-5 m-5">{{ type.name }}</a>
+        {% endif %}
+
+    {% endfor %}
+
+
+
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block titre %}
+    {{ title }}
+{% endblock %}
+{% block title %}
+    {{ parent() }} {{ title }}
+{% endblock %}
+
+
+
+{% block body %}
+
+    {{ form(formu) }}
+
+    <table class="table table-dark table-striped mt-5 w-75 mx-auto">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nom</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for country in countries %}
+    <tr>
+        <td >{{ country.id }}</td>
+        <td>{{ country.name }}</td>
+        <td>
+            <a href="{{ path('country_update', {'id': country.id}) }}" class="btn btn-info">Modifier</a>
+            <a href="{{ path('country_delete', {'id': country.id}) }}" class="btn btn-danger">Supprimer</a>
+
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+
+{% endblock %}

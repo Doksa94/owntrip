@@ -1,0 +1,44 @@
+{% extends 'backoffice.html.twig' %}
+{% block titre %}
+    {{ title }}
+{% endblock %}
+{% block title %}
+    {{ parent() }} {{ title }}
+{% endblock %}
+
+
+
+{% block body %}
+
+
+    {{ form(formulaire_type) }}
+
+
+    <table class="table table-dark table-striped mt-5 w-75 mx-auto">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for type in types %}
+            <tr>
+                <td >{{ type.id }}</td>
+                <td>{{ type.name }}</td>
+                <td>
+                  <a href="{{ path('type_update', {'id': type.id}) }}" class="btn btn-info">Modifier</a>
+                    <a href="{{ path('activity_type_delete', {'id': type.id}) }}" class="btn btn-danger">Supprimer</a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+{% endblock %}

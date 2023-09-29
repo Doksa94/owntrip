@@ -1,0 +1,31 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block titre %}
+    {{ title }}
+{% endblock %}
+{% block title %}
+    {{ parent() }} {{ title }}
+{% endblock %}
+
+
+{% block body %}
+    <div class="row">
+    {% for activity in activities %}
+       <div class="col-4 m-2 card w-25">
+           <div class="card-header text-center">
+               <h2>{{ activity.name }}</h2>
+               <h3>{{ activity.city.country.name }}</h3>
+               <h4>{{ activity.city.name }}</h4>
+
+           </div>
+           <div class="card-body">
+               <a href="{{ path('activity_details', {'id': activity.id}) }}" class="btn btn-secondary">Voir le détail</a>
+               <a href="{{ path('activity_update_medias', {'id': activity.id}) }}" class="btn btn-secondary">Modifier les médias</a>
+               <a href="{{ path('activity_update_infos', {'id': activity.id}) }}" class="btn btn-secondary">Modifier Les informations</a>
+               <a href="{{ path('activity_delete', {'id': activity.id}) }}" class="btn btn-secondary">Supprimer</a>
+           </div>
+       </div>
+    {% endfor %}
+    </div>
+{% endblock %}
+

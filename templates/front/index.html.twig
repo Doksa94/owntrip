@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FrontController!{% endblock %}
+    {% block baniere %}
+
+
+
+        <div id="carouselExample" class="carousel slide w-100 mb-5">
+            <div class="carousel-inner">
+                <div style="height: 200px;!important;" class="carousel-item active">
+                    <img src="https://www.toureiffel.paris/sites/default/files/styles/wide_x1_1024/public/home-bg-1.jpg?itok=0ZQ9FEeP" class="d-block w-100 mx-auto" alt="...">
+                </div>
+                <div style="height: 200px;!important;" class="carousel-item">
+                    <img src="https://www.toureiffel.paris/sites/default/files/styles/wide_x1_1024/public/home-bg-1.jpg?itok=0ZQ9FEeP" class="d-block w-100 mx-auto" alt="...">
+                </div>
+                <div style="height: 200px;!important;" class="carousel-item">
+                    <img src="https://www.toureiffel.paris/sites/default/files/styles/wide_x1_1024/public/home-bg-1.jpg?itok=0ZQ9FEeP" class="d-block w-100 mx-auto" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    {% endblock %}
+{% block body %}
+
+    <h1>Une destination, des envies, faites de votre voyage un rêve ...</h1>
+
+    <form method="post" action="{{ path('activities_result') }}" class="d-flex w-50 mx-auto mt-5">
+        <input class="form-control me-sm-2" name="city" type="search" placeholder="Choisissez une destination">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Go !</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block titre %}
+    {{ title }}
+{% endblock %}
+{% block title %}
+    {{ parent() }} {{ title }}
+{% endblock %}
+
+
+{% block body %}
+
+    {% for activity in package.activities %}
+        <div class="card m-3 w-50 mx-auto text-center">
+            <p>{{ activity.name }}</p>
+            <p>{{ activity.duration }} Heures</p>
+            <p>{{ activity.type.name }}</p>
+        </div>
+    {% endfor %}
+
+
+
+{% endblock %}
+
+

@@ -1,0 +1,24 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block titre %}
+    {{ title }}
+{% endblock %}
+{% block title %}
+    {{ parent() }} {{ title }}
+{% endblock %}
+
+
+
+{% block body %}
+
+  <h2>Choisissez le type de média que vous souhaitez ajouter</h2>
+    {% for type in media_types %}
+        <a href="{{ path('media_create', {'id': type.id, 'type': type.name, 'identity':identity, 'param':param}) }}" class="btn btn-lg btn-info p-5 m-5">{{ type.name }}</a>
+    {% endfor %}
+
+    <a href="{{ path('activity_list') }}" class="btn btn-success">Terminer</a>
+
+
+
+
+{% endblock %}

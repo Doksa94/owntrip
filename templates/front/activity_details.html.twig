@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}
+    {{ title }}
+{% endblock %}
+{% block title %}
+   {{ parent() }} {{ title }}
+{% endblock %}
+
+
+
+{% block body %}
+
+    <div class="row mt-5">
+        <div class="card col-5">
+            <div class="card-header"><h1 class="card-title">{{ activity.name }}</h1></div>
+            <div class="card-body">
+                <h4>Pays: <small>{{ activity.city.country.name }}</small></h4>
+                <h4>Ville : <small>{{ activity.city.name }}</small></h4>
+                <h4>N° Voie: <small> {{ activity.streetNumber }}</small></h4>
+                <h4>Libéllé de voie: <small> {{ activity.streetName }}</small></h4>
+                <h4>Code postal: <small> {{ activity.zipCode }}</small></h4>
+                <h4>Telephone:  <small>{{ activity.tel }}</small></h4>
+                <div>
+                    Categories:
+                    <ul>
+                        {% for category in activity.category %}
+                            <li>{{ category.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <h4>Fourchette de prix: <small>{{ activity.firstPrice }}€ | {{ activity.maxPrice }}€</small> </h4>
+                <h4>Type d'activité:  <small>{{ activity.type.name }}</small></h4>
+                <h4>Drée moyenne:  <small>{{ activity.duration }} Heures</small></h4>
+            </div>
+        </div>
+        <div class="col-5">
+            <h2>Médias en lien</h2>
+            {% for media in activity.medias %}
+                {% if media.type.name=='Vidéo' %}
+                    <video width="300" height="150" class="col-12" controls>
+                        <source src="{{ asset('upload/') }}{{ media.name }}" type="video/mp4">
+
+                    </video>
+
+                {% endif %}
+                {% if media.type.name=='Photo' %}
+
+                    <img class="col-12" src="{{ asset('upload/') }}{{ media.name }}" width="300" alt="">
+
+                {% endif %}
+                {% if media.type.name=='Lien' %}
+
+                    <iframe class="col-12" src="{{ media.name }}" title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
+
+                {% endif %}
+            {% endfor %}
+
+        </div>
+
+
+    </div>
+{% endblock %}
+

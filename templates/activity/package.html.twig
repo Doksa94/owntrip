@@ -1,0 +1,68 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block titre %}
+    {{ title }}
+{% endblock %}
+{% block title %}
+    {{ parent() }} {{ title }}
+{% endblock %}
+
+
+{% block body %}
+    {% block stylesheet %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
+    {% endblock %}
+
+    <form method="post" action="{{ path('package') }}" class="form-inline w-100 mt-5 mb-5 ">
+        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Filtrer les activités par ville" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Filtrer</button>
+    </form>
+
+
+    {{  form(form) }}
+
+
+    <table class="table table-dark table-striped mt-5 w-75 mx-auto">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre d'activité</th>
+            <th>Ville</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for package in packages %}
+            <tr>
+                <td >{{ package.id }}</td>
+                <td>{{ package.activityCount }}</td>
+                <td>{{ package.activities[0].city.name }}</td>
+                <td>
+                    <a href="{{ path('package_detail', {'id': package.id}) }}" class="btn btn-info">Voir les activités</a>
+                    <a onclick="return confirm('Etes-vous sûr?')" href="{{ path('package_delete', {'id': package.id}) }}" class="btn btn-danger">Supprimer</a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+    
+    
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/select2.js') }}"></script>
+        <script>
+            $(function(){
+                $('.select2').select2()
+
+            })
+        </script>
+    {% endblock %}
+
+
+{% endblock %}

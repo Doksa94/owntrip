@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-3 mt-5">
+
+            <form method="post" class="border ps-5 pt-3 pb-3" action="{{ path('activities_filter') }}">
+                <input type="hidden" name="city" value="{{ city }}">
+                {% for type in types %}
+                    <div class="form-check">
+                        <input class="form-check-input" multiple name="type[]" type="checkbox" value="{{ type.id }}"
+                               id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            {{ type.name }}
+                        </label>
+                    </div>
+                {% endfor %}
+                <button class="mt-5 btn btn-dark" type="submit">Filtrer</button>
+            </form>
+
+
+        </div>
+        <div class="col-md-9">
+
+
+            <div class="row justify-content-between">
+                {% for activity in activities %}
+
+
+                    <div class="col-md-3 card m-3">
+                        <h3 class="card-header">{{ activity.name }}</h3>
+                        <div class="card-body">
+
+                            <h6 class="card-subtitle text-muted">{{ activity.streetNumber }} {{ activity.streetName }}</h6>
+                            <h6 class="card-subtitle text-muted">{{ activity.zipCode }} {{ activity.city.name }}</h6>
+                            <h6 class="card-subtitle text-muted">{{ activity.city.country.name }}</h6>
+                            <h6 class="card-subtitle text-muted">{{ activity.tel }}</h6>
+                        </div>
+                        <img src="" alt="">
+                        <div class="card-body">
+
+                            <h5 class="card-subtitle text-muted">{{ activity.type.name }}</h5>
+                            <h6 class="card-subtitle text-muted">{{ activity.firstPrice }}~{{ activity.maxPrice }}€</h6>
+                        </div>
+
+                        {% for category  in activity.category %}
+                            <span class="w-50 mx-auto border text-center mb-1">{{ category.name }}</span>
+                        {% endfor %}
+
+
+                        <div class="card-body">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                Aperçu de l'activité
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Médias</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                {% for media in activity.medias %}
+                                                    {% if media.type.name=='Vidéo' %}
+
+                                                        <video width="300" height="150" class="col-12" controls>
+                                                            <source src="{{ asset('upload/') }}{{ media.name }}"
+                                                                    type="video/mp4">
+
+                                                        </video>
+
+
+                                                    {% endif %}
+                                                    {% if media.type.name=='Photo' %}
+
+                                                        <img class="col-12" src="{{ asset('upload/') }}{{ media.name }}"
+                                                             width="300" alt="">
+
+                                                    {% endif %}
+                                                    {% if media.type.name=='Lien' %}
+
+                                                        <iframe class="col-12" src="{{ media.name }}"
+                                                                title="YouTube video player" frameborder="0"
+                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                                allowfullscreen></iframe>
+
+
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="card-body">
+                            {% set w=0 %}
+                            {% for wish in wishes %}
+
+                                {% if  wish.activity.id ==activity.id %}
+                                    {% set w=1 %}
+
+                                {% endif %}
+                            {% endfor %}
+                            {% if w!=0 %}
+                                <a href="{{ path('remove_wish', {'id':activity.id, 'city':city}) }}"
+                                   class="btn btn-info">Favori</a>
+                            {% else %}
+                                <a href="{{ path('add_wish', {'id':activity.id, 'city':city}) }}"
+                                   class="btn btn-secondary">Favori</a>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

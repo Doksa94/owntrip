@@ -1,0 +1,43 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block titre %}
+    {{ title }}
+{% endblock %}
+{% block title %}
+    {{ parent() }} {{ title }}
+{% endblock %}
+
+
+
+{% block body %}
+
+    {{ form(form) }}
+
+    <table class="table table-dark table-striped mt-5 w-75 mx-auto">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for mediatype in mediastypes %}
+            <tr>
+                <td >{{ mediatype.id }}</td>
+                <td>{{ mediatype.name }}</td>
+                <td>
+                    <a href="{{ path('media_type_update', {'id': mediatype.id}) }}" class="btn btn-info">Modifier</a>
+                    <a href="{{ path('media_type_delete', {'id': mediatype.id}) }}" class="btn btn-danger">Supprimer</a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block titre %}
+    {{ title }}
+{% endblock %}
+{% block title %}
+    {{ parent() }} {{ title }}
+{% endblock %}
+
+
+
+{% block body %}
+
+    {{ form(form) }}
+
+    <table class="table table-dark table-striped mt-5 w-75 mx-auto">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Pays</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for city in cities %}
+            <tr>
+                <td >{{ city.id }}</td>
+                <td>{{ city.name }}</td>
+                <td>{{ city.country.name }}</td>
+                <td>
+                    <a href="{{ path('city_update', {'id': city.id}) }}" class="btn btn-info">Modifier</a>
+                    <a onclick="return confirm('Etes-vous sûr?')" href="{{ path('city_delete', {'id': city.id}) }}" class="btn btn-danger">Supprimer</a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block titre %}
+	{{ title }}
+{% endblock %}
+{% block title %}
+	{{ parent() }} {{ title }}
+{% endblock %}
+
+
+
+
+{% block body %}
+	<div class="container">
+
+		{{ form(form) }}
+
+			<table class="table table-dark table-striped mt-5 w-75 mx-auto">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Nom</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for category in categories %}
+						<tr>
+							<td>{{category.id}}</td>
+							<td>{{category.name}}</td>
+							<td class="col-4">
+								<a class="btn btn-light" href="{{path('category_update', {id:category.id})}}">Modifier</a>
+								<a class="btn btn-danger" href="{{path('category_delete', {id:category.id})}}">Supprimer</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+		</div>
+	{% endblock %}

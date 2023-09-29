@@ -1,0 +1,83 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block titre %}
+    {{ title }}
+{% endblock %}
+{% block title %}
+    {{ parent() }} {{ title }}
+{% endblock %}
+
+
+
+{% block body %}
+
+
+
+
+
+    <a href="{{ path('media_type_choice', {'id': id, 'param': 'activity'}) }}" class="btn btn-secondary btn-lg">Ajouter des médias</a>
+
+
+
+    <form method="post" action="{{ path('delete_media') }}">
+
+    {% for media in medias %}
+
+        {% if media.type.name=='Lien' %}
+
+    <div  class="col-4 my-2">
+        <div class="row">
+            <iframe class="col-12"  src="{{ media.name }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div  class="form-check">
+                <input class="form-check-input" name="choice[]" multiple type="checkbox" value="{{ media.id }}" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckIndeterminate">
+                    {{ media.name }}
+                </label>
+            </div>
+        </div>
+    </div>
+        {% endif %}
+
+        {% if  media.type.name=='Photo' %}
+
+
+    <div  class="col-4 my-2">
+        <div class="row">
+            <img class="col-12" src="{{ asset('upload/') }}{{ media.name }}" width="300" alt="">
+            <div  class="form-check">
+                <input class="form-check-input" name="choice[]" multiple type="checkbox" value="{{ media.id }}" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckIndeterminate">
+                 {{ media.name }}
+                </label>
+            </div>
+        </div>
+    </div>
+
+        {% endif %}
+
+        {% if  media.type.name=='Vidéo' %}
+
+
+
+    <div  class="col-4 my-2">
+        <div class="row">
+            <video width="300" height="150" class="col-12" controls>
+                <source  src="{{ asset('upload/') }}{{ media.name }}" type="video/mp4">
+
+            </video>
+            <div   class="form-check">
+                <input class="form-check-input" name="choice[]" multiple type="checkbox" value="{{ media.id }}" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckIndeterminate">
+                    {{ media.name }}
+                </label>
+            </div>
+        </div>
+    </div>
+        {% endif %}
+    {% endfor %}
+
+       <button type="submit" class="btn btn-info">Supprimer les médias</button>
+    </form>
+
+{% endblock %}
+

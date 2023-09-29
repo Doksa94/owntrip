@@ -1,0 +1,30 @@
+{% extends 'backoffice.html.twig' %}
+
+
+{% block titre %}
+    {{ title }}
+{% endblock %}
+{% block title %}
+    {{ parent() }} {{ title }}
+{% endblock %}
+
+
+{% block body %}
+    <form action="{{ path('delete_media') }}" method="post" class="row">
+        {% for media in medias %}
+            <div  class="col-4 my-2">
+                <div class="row">
+                    <video width="300" height="150" class="col-12" controls>
+                        <source  src="{{ asset('upload/') }}{{ media.name }}" type="video/mp4">
+
+                    </video>
+                    <div  style="position: relative;top:-131px;right: -173px" class="form-check">
+                        <input class="form-check-input" name="choice[]" multiple type="checkbox" value="{{ media.id }}" id="flexCheckDefault">
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <button class="btn btn-primary" type="submit">Supprimer</button>
+    </form>
+
+{% endblock %}
