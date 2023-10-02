@@ -33,11 +33,11 @@ class StripePayController extends AbstractController
                 ('sk_test_51Nwh6HFUq4ru59FZfO3PngblSK0V2efRsT0E4zgtxrYOn5bZDfTMRo239qwhDA2hpsbqD3Ixn2OJ9reAgP7ww3ZG00gy2mDYjf');
                 $session=Session::create([
                     'success_url'=>'https://www.sadok.lock.cezdigit.com//commande/success',
-                    'cancel_url'=>'https://www.sadok.lock.cezdigit.com//wishList'
+                    'cancel_url'=>'https://www.sadok.lock.cezdigit.com//wishList',
 
                     // 'success_url'=>'http://127.0.0.1:8000/commande/success',
                     // 'cancel_url'=>'http://127.0.0.1:8000/wishList',
-                    
+
                     'payment_method_types'=>['card'],
                     'line_items'=>$line_items,
                     'mode'=>'payment'
