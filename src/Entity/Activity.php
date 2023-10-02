@@ -28,6 +28,9 @@ class Activity
     #[ORM\Column]
     private ?int $max_price = null;
 
+    #[ORM\Column]
+    private ?int $price = null;
+
 
     #[ORM\Column(length: 255)]
     private ?string $tel = null;
@@ -279,6 +282,26 @@ class Activity
     public function setDuration(?int $duration): static
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of price
+     */ 
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set the value of price
+     *
+     * @return  self
+     */ 
+    public function setPrice($price)
+    {
+        $this->price = $price;
 
         return $this;
     }
