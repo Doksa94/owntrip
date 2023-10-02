@@ -25,8 +25,15 @@
         {% endfor %}
         </tbody>
     </table>
+    {% if app.user %}
 
-    <a href="{{ path('app_stripe_pay') }}" class="btn btn-sucess">Valider ma commande</a>
+        <a href="{{ path('app_stripe_pay') }}" class="btn btn-sucess">Valider ma commande</a>
+    
+    {% else %}
+
+        <a href="{{ path('login') }}" class="btn btn-sucess">Connectez pour valider votre commande</a>
+
+    {% endif %}
 
 {% endblock %}
     {% block javascripts %}
@@ -57,4 +64,3 @@
         </script>
 
 {% endblock %}
-

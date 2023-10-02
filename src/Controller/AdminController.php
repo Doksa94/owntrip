@@ -14,9 +14,11 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class AdminController extends AbstractController
-{
+{   
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/admin', name: 'app_admin')]
     public function index(): Response
 
@@ -46,6 +48,8 @@ class AdminController extends AbstractController
             $user->setPassword($mdp);
             $manager->persist($user);
             $manager->flush();
+
+            return $this->redirectToRoute('login');
 
         }
 

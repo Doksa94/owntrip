@@ -8,7 +8,9 @@ use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('IS_AUTHENTICATED_FULLY')]
 class StripePayController extends AbstractController
 {
     #[Route('/stripe/pay', name: 'app_stripe_pay')]
@@ -32,8 +34,8 @@ class StripePayController extends AbstractController
                 Stripe::setApiKey
                 ('sk_test_51Nwh6HFUq4ru59FZfO3PngblSK0V2efRsT0E4zgtxrYOn5bZDfTMRo239qwhDA2hpsbqD3Ixn2OJ9reAgP7ww3ZG00gy2mDYjf');
                 $session=Session::create([
-                    'success_url'=>'https://www.sadok.lock.cezdigit.com//commande/success',
-                    'cancel_url'=>'https://www.sadok.lock.cezdigit.com//wishList',
+                    'success_url'=>'https://www.sadok.lock.cezdigit.com/commande/success',
+                    'cancel_url'=>'https://www.sadok.lock.cezdigit.com/wishList',
 
                     // 'success_url'=>'http://127.0.0.1:8000/commande/success',
                     // 'cancel_url'=>'http://127.0.0.1:8000/wishList',
